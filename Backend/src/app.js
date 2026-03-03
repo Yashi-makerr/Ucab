@@ -14,7 +14,21 @@ const { seedCoupons } = require("./controllers/couponController");
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    process.env.FRONTEND_URL,        // set in Render dashboard: https://ucab-frontend.onrender.com
+].filter(Boolean);
+
+app.use(cors({
+    origin: (origin, callback) => {
+        // Allow requests with no origin (curl, mobile apps, Postman)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        return callback(null, true); // Permissive for now — tighten in production if needed
+    },
+    credentials: true,
+}));
 app.use(express.json());
 
 // ─── API Routes ───────────────────────────────────────────────────────────────

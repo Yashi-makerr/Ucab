@@ -19,8 +19,13 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      process.env.FRONTEND_URL,     // https://ucab-frontend.onrender.com
+    ].filter(Boolean),
+    methods: ["GET", "POST"],
+    credentials: false,
   }
 });
 
