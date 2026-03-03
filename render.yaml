@@ -1,5 +1,5 @@
 services:
-  # ── Backend API + Socket.io ───────────────────────────────────────
+  # ── Backend API + Socket.io ─────────────────────────────
   - type: web
     name: ucab-backend
     runtime: node
@@ -15,9 +15,10 @@ services:
       - key: JWT_SECRET
         sync: false
 
-  # ── Frontend (Static Site) ────────────────────────────────────────
-  - type: static
+  # ── Frontend (Static Site) ──────────────────────────────
+  - type: web
     name: ucab-frontend
+    runtime: static
     plan: free
     rootDir: Frontend
     buildCommand: npm install && npm run build
