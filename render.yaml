@@ -3,7 +3,6 @@ services:
   - type: web
     name: ucab-backend
     runtime: node
-    plan: free
     rootDir: Backend
     buildCommand: npm install
     startCommand: node src/server.js
@@ -19,7 +18,6 @@ services:
   - type: web
     name: ucab-frontend
     runtime: static
-    plan: free
     rootDir: Frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
