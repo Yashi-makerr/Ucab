@@ -3,31 +3,30 @@ services:
   - type: web
     name: ucab-backend
     runtime: node
+    plan: free
     rootDir: Backend
     buildCommand: npm install
     startCommand: node src/server.js
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
       - key: MONGO_URI
-        sync: false   # set this in Render dashboard > Environment
+        sync: false
       - key: JWT_SECRET
-        sync: false   # set this in Render dashboard > Environment
+        sync: false
 
   # ── Frontend (Static Site) ────────────────────────────────────────
-  - type: web
+  - type: static
     name: ucab-frontend
-    runtime: static
+    plan: free
     rootDir: Frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        sync: false   # set to https://ucab-backend.onrender.com/api
+        sync: false
       - key: VITE_SOCKET_URL
-        sync: false   # set to https://ucab-backend.onrender.com
+        sync: false
     routes:
       - type: rewrite
         source: /*
