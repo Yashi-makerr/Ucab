@@ -1,20 +1,7 @@
-services:
-  # ── Backend API + Socket.io ─────────────────────────────
-  - type: web
-    name: ucab-backend
-    runtime: node
-    rootDir: Backend
-    buildCommand: npm install
-    startCommand: node src/server.js
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: MONGO_URI
-        sync: false
-      - key: JWT_SECRET
-        sync: false
+# Render only handles the Frontend (Static Site — free, no card required)
+# Backend is deployed separately on Railway (free, no card required)
 
-  # ── Frontend (Static Site) ──────────────────────────────
+services:
   - type: web
     name: ucab-frontend
     runtime: static
@@ -23,9 +10,9 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        sync: false
+        sync: false   # set to: https://ucab-backend.up.railway.app/api
       - key: VITE_SOCKET_URL
-        sync: false
+        sync: false   # set to: https://ucab-backend.up.railway.app
     routes:
       - type: rewrite
         source: /*
