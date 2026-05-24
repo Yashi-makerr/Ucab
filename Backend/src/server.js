@@ -17,6 +17,10 @@ connectDB();
 
 const server = http.createServer(app);
 
+app.get("/", (req, res) => {
+  res.send("Ucab Backend Running 🚀");
+});
+
 const io = new Server(server, {
   cors: {
     origin: [
